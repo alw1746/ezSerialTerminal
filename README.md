@@ -27,7 +27,7 @@ Other targets:
 
 ## Examples
 
-Arduino IDE | Examples | Erriez Serial Terminal |
+Arduino IDE | Examples | ez Serial Terminal |
 
 * [ErriezSerialTerminal](https://github.com/Erriez/ErriezSerialTerminal/blob/master/examples/ErriezSerialTerminal/ErriezSerialTerminal.ino)
 
@@ -48,7 +48,7 @@ Default newline character: ```'\n'```
 Default delimiter character: ```Space```
 
 ```c++
-#include <ErriezSerialTerminal.h>
+#include <ezSerialTerminal.h>
 
 // Newline character '\r' or '\n'
 char newlineChar = '\n'; 
