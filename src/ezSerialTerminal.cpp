@@ -91,6 +91,18 @@ void SerialTerminal::setSerialEcho(bool doEcho)
 }
 
 /*!
+ * \brief Toggle line or char mode to execute command upon read.
+ * \details
+ *      Set mode to execute command upon read of a char or EOL.
+ * \param doOne
+ *      Should read terminate on every char instead of waiting for newline?
+ */
+void SerialTerminal::setLineMode(bool line)
+{
+    lineMode = line;
+}
+
+/*!
  * \brief Set post command handler callback for after all handled commands.
  * \details
  *      Store post command handler which will be called when after executing any handled command.
@@ -125,11 +137,39 @@ void SerialTerminal::readSerial()
     bool matched = false;
     char *command;
     char c;
+    char buf[]={' ','\0'};
 
     while (Serial.available() > 0) {
         // Read one character from serial port
         c = (char)Serial.read();
 
+        //received a '\' at start of buffer and not in line mode
+        if (c == ST_PREFIX && _rxBufferIndex == 0 && !lineMode) {
+          tempLineMode=true;    
+          lineMode=true;     //set line mode
+        }
+        if (!lineMode) {     //in char mode?
+          buf[0]=c;
+          for (int i = 0; i < _numCommands; i++) {
+            // Compare the found command against the list of known commands for a match
+            if (strcmp(buf, _commandList[i].command) == 0) {
+              if (doCharEcho) {
+                Serial.print(c);
+              }
+              // Call command callback handler
+              (*_commandList[i].function)();
+              matched = true;
+              break;
+            }
+          }
+          if (matched) {
+            if (_postCommandHandler) {
+             (*_postCommandHandler)();
+            }
+            matched=false;
+            continue;
+          }
+        }
         // Check newline character \c '\\r' or \c '\\n' at the end of a command
         if (c == _newlineChar) {
             //Echo received char
@@ -162,6 +202,11 @@ void SerialTerminal::readSerial()
             }
 
             clearBuffer();
+            if (tempLineMode) {
+              tempLineMode=false;
+              lineMode=false;
+            }
+            matched=false;
         // either ^H og 127 backspace chars
         } else if (c == '\b' || c == 127) {
             if (_rxBufferIndex > 0) {
@@ -182,6 +227,7 @@ void SerialTerminal::readSerial()
                 }
             }
         }
+
     }
 }
 
