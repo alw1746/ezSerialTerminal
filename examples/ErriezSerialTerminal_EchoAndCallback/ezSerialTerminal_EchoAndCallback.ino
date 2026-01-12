@@ -31,7 +31,7 @@
  *      Open the Serial Console in a terminal emulator like PuTTY to see typed charecters appear as sent.
  */
 
-#include <ErriezSerialTerminal.h>
+#include <ezSerialTerminal.h>
 
 // LED pin
 #define LED_PIN     LED_BUILTIN
