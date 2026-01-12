@@ -33,7 +33,7 @@ Other targets:
 
 Arduino IDE | Examples | ezSerialTerminal |
 
-* [ezSerialTerminal](https://github.com/alw1746/ezSerialTerminal/blob/master/examples/ErriezSerialTerminal/ezSerialTerminal.ino)
+* [ezSerialTerminal](https://github.com/alw1746/ezSerialTerminal/blob/master/examples/ezSerialTerminal/ezSerialTerminal.ino)
 
 ## Documentation
 
