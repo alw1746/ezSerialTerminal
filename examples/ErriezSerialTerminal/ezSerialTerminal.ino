@@ -29,7 +29,7 @@
  *      Documentation:  https://erriez.github.io/ErriezSerialTerminal
  */
 
-#include <ErriezSerialTerminal.h>
+#include <ezSerialTerminal.h>
 
 // LED pin
 #define LED_PIN     LED_BUILTIN
