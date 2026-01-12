@@ -4,6 +4,10 @@ This is a universal Serial Terminal library for Arduino to parse ASCII commands 
 
 ![Serial Terminal](https://raw.githubusercontent.com/Erriez/ErriezSerialTerminal/master/extras/ScreenshotSerialTerminal.png)
 
+NOTE: the following changes have been applied to the original version.
+- rename files and example names to ezSerialTerminal for convenience.
+- modified readSerial to accept char-mode entry without needing newline.
+- modified readSerial to accept \cmd as line-mode entry.
 
 ## Hardware
 
@@ -29,7 +33,7 @@ Other targets:
 
 Arduino IDE | Examples | ezSerialTerminal |
 
-* [ErriezSerialTerminal](https://github.com/alw1746/ezSerialTerminal/blob/master/examples/ErriezSerialTerminal/ezSerialTerminal.ino)
+* [ezSerialTerminal](https://github.com/alw1746/ezSerialTerminal/blob/master/examples/ErriezSerialTerminal/ezSerialTerminal.ino)
 
 ## Documentation
 
