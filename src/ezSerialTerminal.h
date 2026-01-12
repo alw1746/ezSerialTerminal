@@ -47,6 +47,11 @@
 #define ST_NUM_COMMAND_CHARS    8
 
 /*!
+ * \brief Prefix for line mode commands.
+ */
+#define ST_PREFIX    '\\'
+
+/*!
  * \brief SerialTerminal class
  */
 class SerialTerminal
@@ -59,6 +64,7 @@ public:
 
     void setSerialEcho(bool doEcho);
     void setPostCommandHandler(void (*function)(void));
+    void setLineMode(bool line);
 
     void readSerial();
     void clearBuffer();
@@ -81,6 +87,8 @@ private:
     char *_lastPos;
 
     bool doCharEcho;
+    bool lineMode=true;
+    bool tempLineMode=false;
     void (*_postCommandHandler)(void);
 
     void (*_defaultHandler)(const char *);
