@@ -27,10 +27,10 @@ Other targets:
 
 ## Examples
 
-Arduino IDE | Examples | ez Serial Terminal |
+Arduino IDE | Examples | ezSerialTerminal |
 
 * [ErriezSerialTerminal](https://github.com/Erriez/ErriezSerialTerminal/blob/master/examples/ErriezSerialTerminal/ErriezSerialTerminal.ino)
-
+* [ErriezSerialTerminal](https://github.com/Erriez/ErriezSerialTerminal/blob/master/examples/ErriezSerialTerminal/ErriezSerialTerminal.ino)
 
 ## Documentation
 
