@@ -23,7 +23,7 @@
  */
 
 /*!
- * \file ErriezSerialTerminal.h
+ * \file ezSerialTerminal.h
  * \brief Serial terminal library for Arduino
  * \details
  *      Source:         https://github.com/Erriez/ErriezSerialTerminal
