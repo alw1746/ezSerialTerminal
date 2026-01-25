@@ -8,6 +8,7 @@ NOTE: the following changes have been applied to the original version by Erriez.
 - rename files and example names to ezSerialTerminal for convenience.
 - modified readSerial to accept char-mode entry without needing newline.
 - modified readSerial to accept \cmd as line-mode entry.
+- added SericonController example.
 
 ## Hardware
 
