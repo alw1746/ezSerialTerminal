@@ -35,6 +35,7 @@ Other targets:
 Arduino IDE | Examples | ezSerialTerminal |
 
 * [ezSerialTerminal](https://github.com/alw1746/ezSerialTerminal/blob/master/examples/ezSerialTerminal/ezSerialTerminal.ino)
+* [SericonController](https://github.com/alw1746/ezSerialTerminal/blob/master/examples/SericonController/SericonController.ino)
 
 ## Documentation
 
