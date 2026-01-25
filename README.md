@@ -90,17 +90,17 @@ void setup()
     // Add command callback handlers
     term.addCommand("?", cmdHelp);
     term.addCommand("\\help", cmdHelp);
-    term.addCommand("\\on", cmdLedOn);
-    term.addCommand("\\off", cmdLedOff);
+    term.addCommand("o", cmdLedOn);
+    term.addCommand("f", cmdLedOff);
 }
 
 void cmdHelp()
 {
     // Print usage
     Serial.println(F("Serial terminal usage:"));
-    Serial.println(F("  \\help or ?          Print this usage"));
-    Serial.println(F("  \\on                 Turn LED on"));
-    Serial.println(F("  \\off                Turn LED off"));
+    Serial.println(F("  \\help or ?       Print this usage"));
+    Serial.println(F("  o                 Turn LED on"));
+    Serial.println(F("  f                 Turn LED off"));
 }
 
 void cmdLedOn()
