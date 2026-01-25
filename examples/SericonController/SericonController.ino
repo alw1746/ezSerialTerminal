@@ -1,7 +1,9 @@
 /*
   Test sketch for Sericon class. Sericon uses a PC keyboard to emulate switches,
   potentiometers and rotary encoders. It also provides a CLI facility for the mcu.
-  - control RGB led sequence period.
+  Using constructor injection,pointer injection and callback functions, Sericon can
+  control external events and update data.
+  - change RGB led sequence period.
   - control waveform,frequency,amplitude on OLED screen.
   - use Preferences API to remember period,freq,ampl settings.
 
