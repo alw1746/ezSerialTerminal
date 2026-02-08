@@ -64,7 +64,6 @@ public:
 
     void setSerialEcho(bool doEcho);
     void setPostCommandHandler(void (*function)(void));
-    void setLineMode(bool line);
 
     void readSerial();
     void clearBuffer();
@@ -87,8 +86,7 @@ private:
     char *_lastPos;
 
     bool doCharEcho;
-    bool lineMode=true;
-    bool tempLineMode=false;
+    bool lineMode=false;   //default char mode
     void (*_postCommandHandler)(void);
 
     void (*_defaultHandler)(const char *);

@@ -91,18 +91,6 @@ void SerialTerminal::setSerialEcho(bool doEcho)
 }
 
 /*!
- * \brief Toggle line or char mode to execute command upon read.
- * \details
- *      Set mode to execute command upon read of a char or EOL.
- * \param doOne
- *      Should read terminate on every char instead of waiting for newline?
- */
-void SerialTerminal::setLineMode(bool line)
-{
-    lineMode = line;
-}
-
-/*!
  * \brief Set post command handler callback for after all handled commands.
  * \details
  *      Store post command handler which will be called when after executing any handled command.
@@ -130,7 +118,8 @@ void SerialTerminal::setDefaultHandler(void (*function)(const char *))
 /*!
  * \brief Read from serial port.
  * \details
- *      Process command when newline character has been received.
+ *      In char mode(default), process every char for command. If 1st char is '\', assume line mode.
+ *      In line mode, process command when newline character has been received.
  */
 void SerialTerminal::readSerial()
 {
@@ -145,10 +134,9 @@ void SerialTerminal::readSerial()
 
         //received a '\' at start of buffer and not in line mode
         if (c == ST_PREFIX && _rxBufferIndex == 0 && !lineMode) {
-          tempLineMode=true;    
           lineMode=true;     //set line mode
         }
-        if (!lineMode) {     //in char mode?
+        if (!lineMode) {     //default is char mode
           buf[0]=c;
           for (int i = 0; i < _numCommands; i++) {
             // Compare the found command against the list of known commands for a match
@@ -159,7 +147,7 @@ void SerialTerminal::readSerial()
               // Call command callback handler
               (*_commandList[i].function)();
               matched = true;
-              break;
+              break;  //exit for-loop
             }
           }
           if (matched) {
@@ -167,10 +155,10 @@ void SerialTerminal::readSerial()
              (*_postCommandHandler)();
             }
             matched=false;
-            continue;
+            continue;   //skip rest of loop
           }
         }
-        // Check newline character \c '\\r' or \c '\\n' at the end of a command
+        // lineMode:Check newline character \c '\\r' or \c '\\n' at the end of a command
         if (c == _newlineChar) {
             //Echo received char
             if (doCharEcho) {
@@ -202,10 +190,7 @@ void SerialTerminal::readSerial()
             }
 
             clearBuffer();
-            if (tempLineMode) {
-              tempLineMode=false;
-              lineMode=false;
-            }
+            lineMode=false;     //reset to default char mode
             matched=false;
         // either ^H og 127 backspace chars
         } else if (c == '\b' || c == 127) {
