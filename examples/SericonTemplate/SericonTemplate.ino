@@ -13,21 +13,16 @@
 #include <Arduino.h>
 #include <Sericon.h>
 
-#if defined(CONFIG_IDF_TARGET_ESP32S3)   //S3 onboard Neopixel
-  #define LED_BUILTIN 21     //Waveshare S3 Zero=21,tenstar robot S3 Supermini=48,WEMOS S3 Mini=47
-#elif defined(CONFIG_IDF_TARGET_ESP32)
-  #define LED_BUILTIN 2      //NB:not all ESP32 have this.
-#endif
 unsigned long timer1=0;          //loop timer
 unsigned long period1=1000;      //interval msec
 bool timer1Enabled=true;         //toggle on/off
-int state=0;
+int blinkState=0;
 
 Sericon sericon(Serial,period1);      //constructor injection to control period
 
 //callback function to receive data changes.
-void mycallback(bool data) {
-  timer1Enabled = !data;             //if data=true, disable timer
+void mycallback(bool state) {
+  timer1Enabled = state;             //timer state
 }
 
 void setup(void) {
@@ -43,14 +38,7 @@ void loop() {
   sericon.readSerial();
   if ((millis() - timer1 > period1) && timer1Enabled) {
     timer1 = millis();
-    state = !state;
-#if defined(CONFIG_IDF_TARGET_ESP32S3)
-    if (state)
-      rgbLedWrite(LED_BUILTIN,0,100,0);   //blink neopixel
-    else
-      rgbLedWrite(LED_BUILTIN,0,0,0);
-#else
-    digitalWrite(LED_BUILTIN,state);      //blink led
-#endif
+    blinkState = !blinkState;
+    digitalWrite(LED_BUILTIN,blinkState);      //blink led
   }
 }

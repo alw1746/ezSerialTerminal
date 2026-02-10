@@ -47,7 +47,7 @@ private:
     Preferences preferences;
     unsigned long *periodPtr=nullptr;      //pointer injection
     unsigned long &period;                 //constructor injection
-    bool isMuted=false;                    //callback function parameter
+    bool tmrState=true;                    //callback function parameter
 
     static Sericon* _instance;
 };

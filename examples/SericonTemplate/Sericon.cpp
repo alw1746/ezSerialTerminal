@@ -125,10 +125,10 @@ void Sericon::cmdPeriodPtrDn() {
 
 //callback function
 void Sericon::cmdMute() {
-  isMuted = !isMuted;
-  (isMuted) ? serport.println(" mute on") : serport.println(" mute off");
+  tmrState = !tmrState;
+  (tmrState) ? serport.println(" timer on") : serport.println(" timer off");
   if (_userCallback != nullptr) {
-    _userCallback(isMuted);
+    _userCallback(tmrState);
   }
 }
 
